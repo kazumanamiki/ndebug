@@ -14,5 +14,5 @@ NdebugPrinter.instance.io = STDOUT # 出力先設定
 ########################################################
 # 初回デバッグコマンド
 ########################################################
-NdebugPrinter.print "hello! ndebug console. \"?\" type help\n"
+NdebugPrinter.print "hello! ndebug console.\n"
 $ndebug.input_command(TraceInfo.new("", "ndebug.rb", 0, "", TOPLEVEL_BINDING, "", nil))

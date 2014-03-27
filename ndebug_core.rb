@@ -71,8 +71,6 @@ class NdebugCore
 			return dump_watch_list(command)
 		when "wi" # watch list input setting
 			return load_watch_list(command)
-		when "?"  # show help
-			return help_print()
 		else
 			NdebugPrinter.print "command not found\n"
 			return true
@@ -293,13 +291,6 @@ class NdebugCore
 		return true
 	end
 
-	# ヘルプコマンド表示
-	def help_print()
-		# TODO :ヘルプテキストを聖書
-		NdebugPrinter.print "ヘルプテキスト出力\n"
-		return true
-	end
-
 	# ウォッチ式の一覧を出力する
 	def dump_watch_list(command)
 		unless command.command.count > 1
@@ -334,13 +325,6 @@ class NdebugCore
 			NdebugPrinter.print "[command error] #{$!.message}\n"
 		end
 
-		return true
-	end
-
-	# ヘルプコマンド表示
-	def help_print()
-		# TODO :ヘルプテキストを聖書
-		NdebugPrinter.print "ヘルプテキスト出力\n"
 		return true
 	end
 
@@ -394,7 +378,6 @@ set_trace_func proc { |event, file, line, id, binding, classname|
 	bind_obj = eval("instance_eval{|obj| obj}", binding)
 	traceinfo = TraceInfo.new(event, file, line, id, binding, classname, bind_obj)
 
-	# TODO:拡張性が効くように別メソッドにして true/false を返却するべき
 	# c-call, c-return は無視すべき？
 	if $ndebug.is_break(traceinfo)
 
