@@ -31,7 +31,7 @@ class NdebugCore
 		end
 
 		# ブレイクポイントチェック
-		if break_info.find(traceinfo.file, traceinfo.line)
+		if break_info.check_break(traceinfo.file, traceinfo.line)
 			return true
 		end
 	end

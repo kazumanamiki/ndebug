@@ -14,8 +14,12 @@ class BreakInfo
 		@list.delete_at(index)
 	end
 
+	def check_break(file, line)
+		return @list.find { |item| item.break?(file, line) }
+	end
+
 	def find(file, line)
-		return @list.find { |item| item.equal(file, line) }
+		return @list.find { |item| item.equal?(file, line) }
 	end
 
 	def dump
@@ -46,7 +50,18 @@ class BreakPoint
 		@enable = true
 	end
 
-	def equal(file, line)
+	def equal?(file, line)
 		return ((@file == file) && (@line == line))
+	end
+
+	def break?(file, line)
+		return false unless enable
+
+		# ファイル名が空文字であれば行数のみの判定とする
+		if @file.empty?
+			return (@line == line)
+		else
+			return (file.include?(@file) &&(@line == line))
+		end
 	end
 end
