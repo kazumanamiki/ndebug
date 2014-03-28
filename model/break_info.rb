@@ -57,8 +57,8 @@ class BreakPoint
 	def break?(file, line)
 		return false unless enable
 
-		# ファイル名が空文字であれば行数のみの判定とする
-		if @file.empty?
+		# ファイル名が"*"であれば行数のみの判定とする
+		if @file == "*"
 			return (@line == line)
 		else
 			return (file.include?(@file) &&(@line == line))
